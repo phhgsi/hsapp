@@ -4,5 +4,13 @@
   "allowed_devices": [
     "PASTE_YOUR_ALLOWED_DEVICE_ID_1_HERE",
     "PASTE_YOUR_ALLOWED_DEVICE_ID_2_HERE"
-  ]
+  ],
+  "update_config": {
+    "latest_version_code": 33,
+    "latest_version_name": "2.0.1",
+    "force_update": false,
+    "update_title": "New Update Available!",
+    "update_message": "A new version of Hamare Shikshak is available. Please update to continue using the app.",
+    "apk_download_url": "https://github.com/phhgsi/hsapp/releases"
+  }
 }
