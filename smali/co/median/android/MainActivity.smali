@@ -12665,6 +12665,8 @@
 .method protected onResume()V
     .locals 4
 
+    invoke-static {p0}, Lco/median/android/DeviceLicenseManager;->checkLicense(Landroid/app/Activity;)V
+
     .line 1
     invoke-super {p0}, Landroidx/fragment/app/h;->onResume()V
 
