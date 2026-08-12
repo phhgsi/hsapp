@@ -73,77 +73,49 @@
 
 # virtual methods
 .method public run()V
-    .locals 6
+    .locals 5
+
+    .line 129
+    iget-boolean v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$allowed:Z
+
+    if-nez v0, :cond_0
 
     .line 130
-    const/4 v0, 0x0
+    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
 
-    :try_start_0
-    iget-boolean v1, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$allowed:Z
+    iget-object v0, v0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
 
-    if-nez v1, :cond_0
+    iget-object v1, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$deviceId:Ljava/lang/String;
 
-    .line 131
-    iget-object v1, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
+    iget-object v2, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$messageToShow:Ljava/lang/String;
 
-    iget-object v1, v1, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
-
-    iget-object v2, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$deviceId:Ljava/lang/String;
-
-    iget-object v3, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$messageToShow:Ljava/lang/String;
-
-    invoke-static {v1, v2, v3}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {v0, v1, v2}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
 
     goto :goto_0
 
-    .line 132
+    .line 131
     :cond_0
-    iget-boolean v1, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$hasNewUpdate:Z
+    iget-boolean v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$hasNewUpdate:Z
 
-    if-eqz v1, :cond_1
+    if-eqz v0, :cond_1
 
-    .line 133
-    iget-object v1, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
+    .line 132
+    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
 
-    iget-object v1, v1, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
+    iget-object v0, v0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
 
-    iget-object v2, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalUpdateTitle:Ljava/lang/String;
+    iget-object v1, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalUpdateTitle:Ljava/lang/String;
 
-    iget-object v3, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalUpdateMsg:Ljava/lang/String;
+    iget-object v2, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalUpdateMsg:Ljava/lang/String;
 
-    iget-object v4, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalDownloadUrl:Ljava/lang/String;
+    iget-object v3, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalDownloadUrl:Ljava/lang/String;
 
-    iget-boolean v5, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalForceUpdate:Z
+    iget-boolean v4, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalForceUpdate:Z
 
-    invoke-static {v1, v2, v3, v4, v5}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowUpdateDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
-    :try_end_0
-    .catchall {:try_start_0 .. :try_end_0} :catchall_0
+    invoke-static {v0, v1, v2, v3, v4}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowUpdateDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
 
-    .line 136
+    .line 134
     :cond_1
     :goto_0
-    invoke-static {}, Lco/median/android/DeviceLicenseManager;->-$$Nest$sfgetisChecking()Ljava/util/concurrent/atomic/AtomicBoolean;
-
-    move-result-object v1
-
-    invoke-virtual {v1, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
-
-    .line 137
-    nop
-
-    .line 138
     return-void
-
-    .line 136
-    :catchall_0
-    move-exception v1
-
-    invoke-static {}, Lco/median/android/DeviceLicenseManager;->-$$Nest$sfgetisChecking()Ljava/util/concurrent/atomic/AtomicBoolean;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v0}, Ljava/util/concurrent/atomic/AtomicBoolean;->set(Z)V
-
-    .line 137
-    throw v1
 .end method

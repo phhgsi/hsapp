@@ -32,7 +32,7 @@
         }
     .end annotation
 
-    .line 157
+    .line 151
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
 
     iput-object p2, p0, Lco/median/android/DeviceLicenseManager$2;->val$deviceId:Ljava/lang/String;
@@ -45,56 +45,68 @@
 
 # virtual methods
 .method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 1
+    .locals 2
 
-    .line 160
-    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
+    .line 155
+    const/4 p1, 0x0
 
-    const-string p2, "clipboard"
+    :try_start_0
+    iget-object p2, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
 
-    invoke-virtual {p1, p2}, Landroid/app/Activity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
+    const-string v0, "clipboard"
 
-    move-result-object p1
-
-    check-cast p1, Landroid/content/ClipboardManager;
-
-    .line 161
-    const-string p2, "Device ID"
-
-    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$2;->val$deviceId:Ljava/lang/String;
-
-    invoke-static {p2, v0}, Landroid/content/ClipData;->newPlainText(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/ClipData;
+    invoke-virtual {p2, v0}, Landroid/app/Activity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
     move-result-object p2
 
-    .line 162
-    const/4 v0, 0x0
+    check-cast p2, Landroid/content/ClipboardManager;
 
-    if-eqz p1, :cond_0
+    .line 156
+    const-string v0, "Device ID"
+
+    iget-object v1, p0, Lco/median/android/DeviceLicenseManager$2;->val$deviceId:Ljava/lang/String;
+
+    invoke-static {v0, v1}, Landroid/content/ClipData;->newPlainText(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/ClipData;
+
+    move-result-object v0
+
+    .line 157
+    if-eqz p2, :cond_0
+
+    .line 158
+    invoke-virtual {p2, v0}, Landroid/content/ClipboardManager;->setPrimaryClip(Landroid/content/ClipData;)V
+
+    .line 159
+    iget-object p2, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
+
+    const-string v0, "Device ID copied to clipboard!"
+
+    invoke-static {p2, v0, p1}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object p2
+
+    invoke-virtual {p2}, Landroid/widget/Toast;->show()V
+    :try_end_0
+    .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
+
+    goto :goto_0
+
+    .line 161
+    :catch_0
+    move-exception p2
+
+    :cond_0
+    :goto_0
+    nop
+
+    .line 162
+    iget-object p2, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
+
+    invoke-virtual {p2}, Landroid/app/Activity;->finishAffinity()V
 
     .line 163
-    invoke-virtual {p1, p2}, Landroid/content/ClipboardManager;->setPrimaryClip(Landroid/content/ClipData;)V
+    invoke-static {p1}, Ljava/lang/System;->exit(I)V
 
     .line 164
-    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
-
-    const-string p2, "Device ID copied to clipboard!"
-
-    invoke-static {p1, p2, v0}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
-
-    move-result-object p1
-
-    invoke-virtual {p1}, Landroid/widget/Toast;->show()V
-
-    .line 166
-    :cond_0
-    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
-
-    invoke-virtual {p1}, Landroid/app/Activity;->finishAffinity()V
-
-    .line 167
-    invoke-static {v0}, Ljava/lang/System;->exit(I)V
-
-    .line 168
     return-void
 .end method

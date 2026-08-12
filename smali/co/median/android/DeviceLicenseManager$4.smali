@@ -34,7 +34,7 @@
         }
     .end annotation
 
-    .line 194
+    .line 193
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$downloadUrl:Ljava/lang/String;
 
     iput-object p2, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
@@ -51,7 +51,7 @@
 .method public onClick(Landroid/content/DialogInterface;I)V
     .locals 1
 
-    .line 198
+    .line 197
     :try_start_0
     new-instance p1, Landroid/content/Intent;
 
@@ -65,7 +65,7 @@
 
     invoke-direct {p1, p2, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
-    .line 199
+    .line 198
     iget-object p2, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {p2, p1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
@@ -74,29 +74,29 @@
 
     goto :goto_0
 
-    .line 200
+    .line 199
     :catch_0
     move-exception p1
 
     :goto_0
     nop
 
-    .line 201
+    .line 200
     iget-boolean p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$forceUpdate:Z
 
     if-eqz p1, :cond_0
 
-    .line 202
+    .line 201
     iget-object p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {p1}, Landroid/app/Activity;->finishAffinity()V
 
-    .line 203
+    .line 202
     const/4 p1, 0x0
 
     invoke-static {p1}, Ljava/lang/System;->exit(I)V
 
-    .line 205
+    .line 204
     :cond_0
     return-void
 .end method
