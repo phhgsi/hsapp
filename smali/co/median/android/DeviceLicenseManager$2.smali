@@ -1,86 +1,100 @@
 .class Lco/median/android/DeviceLicenseManager$2;
 .super Ljava/lang/Object;
 .source "DeviceLicenseManager.java"
-.implements Ljava/lang/Runnable;
+
+# interfaces
+.implements Landroid/content/DialogInterface$OnClickListener;
+
+
+# annotations
+.annotation system Ldalvik/annotation/EnclosingMethod;
+    value = Lco/median/android/DeviceLicenseManager;->showUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
+.end annotation
+
+.annotation system Ldalvik/annotation/InnerClass;
+    accessFlags = 0x0
+    name = null
+.end annotation
+
 
 # instance fields
-.field final synthetic this$0:Lco/median/android/DeviceLicenseManager$1;
+.field final synthetic val$activity:Landroid/app/Activity;
 
 .field final synthetic val$deviceId:Ljava/lang/String;
 
-.field final synthetic val$msg:Ljava/lang/String;
 
 # direct methods
-.method constructor <init>(Lco/median/android/DeviceLicenseManager$1;Ljava/lang/String;Ljava/lang/String;)V
+.method constructor <init>(Landroid/app/Activity;Ljava/lang/String;)V
     .locals 0
+    .annotation system Ldalvik/annotation/Signature;
+        value = {
+            "()V"
+        }
+    .end annotation
 
-    iput-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->this$0:Lco/median/android/DeviceLicenseManager$1;
+    .line 133
+    iput-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
 
     iput-object p2, p0, Lco/median/android/DeviceLicenseManager$2;->val$deviceId:Ljava/lang/String;
-
-    iput-object p3, p0, Lco/median/android/DeviceLicenseManager$2;->val$msg:Ljava/lang/String;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
     return-void
 .end method
 
+
 # virtual methods
-.method public run()V
-    .locals 4
+.method public onClick(Landroid/content/DialogInterface;I)V
+    .locals 1
 
-    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$2;->this$0:Lco/median/android/DeviceLicenseManager$1;
+    .line 136
+    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
 
-    iget-object v0, v0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
+    const-string p2, "clipboard"
 
-    invoke-virtual {v0}, Landroid/app/Activity;->isFinishing()Z
+    invoke-virtual {p1, p2}, Landroid/app/Activity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
 
-    move-result v1
+    move-result-object p1
 
-    if-nez v1, :cond_0
+    check-cast p1, Landroid/content/ClipboardManager;
 
-    new-instance v1, Landroid/app/AlertDialog$Builder;
+    .line 137
+    const-string p2, "Device ID"
 
-    invoke-direct {v1, v0}, Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V
+    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$2;->val$deviceId:Ljava/lang/String;
 
-    const-string v2, "Device Unauthorized"
+    invoke-static {p2, v0}, Landroid/content/ClipData;->newPlainText(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Landroid/content/ClipData;
 
-    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+    move-result-object p2
 
-    iget-object v2, p0, Lco/median/android/DeviceLicenseManager$2;->val$msg:Ljava/lang/String;
+    .line 138
+    const/4 v0, 0x0
 
-    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setMessage(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;
+    if-eqz p1, :cond_0
 
-    const/4 v2, 0x0
+    .line 139
+    invoke-virtual {p1, p2}, Landroid/content/ClipboardManager;->setPrimaryClip(Landroid/content/ClipData;)V
 
-    invoke-virtual {v1, v2}, Landroid/app/AlertDialog$Builder;->setCancelable(Z)Landroid/app/AlertDialog$Builder;
+    .line 140
+    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
 
-    new-instance v2, Lco/median/android/DeviceLicenseManager$2$1;
+    const-string p2, "Device ID copied to clipboard!"
 
-    invoke-direct {v2, p0, v0}, Lco/median/android/DeviceLicenseManager$2$1;-><init>(Lco/median/android/DeviceLicenseManager$2;Landroid/app/Activity;)V
+    invoke-static {p1, p2, v0}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
 
-    const-string v3, "Copy Device ID & Exit"
+    move-result-object p1
 
-    invoke-virtual {v1, v3, v2}, Landroid/app/AlertDialog$Builder;->setPositiveButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
+    invoke-virtual {p1}, Landroid/widget/Toast;->show()V
 
-    new-instance v2, Lco/median/android/DeviceLicenseManager$2$2;
-
-    invoke-direct {v2, p0, v0}, Lco/median/android/DeviceLicenseManager$2$2;-><init>(Lco/median/android/DeviceLicenseManager$2;Landroid/app/Activity;)V
-
-    const-string v3, "Close App"
-
-    invoke-virtual {v1, v3, v2}, Landroid/app/AlertDialog$Builder;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;
-
-    invoke-virtual {v1}, Landroid/app/AlertDialog$Builder;->create()Landroid/app/AlertDialog;
-
-    move-result-object v0
-
-    const/4 v1, 0x0
-
-    invoke-virtual {v0, v1}, Landroid/app/Dialog;->setCanceledOnTouchOutside(Z)V
-
-    invoke-virtual {v0}, Landroid/app/Dialog;->show()V
-
+    .line 142
     :cond_0
+    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
+
+    invoke-virtual {p1}, Landroid/app/Activity;->finishAffinity()V
+
+    .line 143
+    invoke-static {v0}, Ljava/lang/System;->exit(I)V
+
+    .line 144
     return-void
 .end method
