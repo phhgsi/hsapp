@@ -3,12 +3,12 @@
 .source "DeviceLicenseManager.java"
 
 # interfaces
-.implements Landroid/content/DialogInterface$OnClickListener;
+.implements Landroid/view/View$OnClickListener;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lco/median/android/DeviceLicenseManager;->showUpdateDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+    value = Lco/median/android/DeviceLicenseManager;->showThemedUpdateDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -20,13 +20,15 @@
 # instance fields
 .field final synthetic val$activity:Landroid/app/Activity;
 
+.field final synthetic val$dialog:Landroid/app/AlertDialog;
+
 .field final synthetic val$downloadUrl:Ljava/lang/String;
 
 .field final synthetic val$forceUpdate:Z
 
 
 # direct methods
-.method constructor <init>(Ljava/lang/String;Landroid/app/Activity;Z)V
+.method constructor <init>(Ljava/lang/String;Landroid/app/Activity;ZLandroid/app/AlertDialog;)V
     .locals 0
     .annotation system Ldalvik/annotation/Signature;
         value = {
@@ -34,12 +36,14 @@
         }
     .end annotation
 
-    .line 193
+    .line 446
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$downloadUrl:Ljava/lang/String;
 
     iput-object p2, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
 
     iput-boolean p3, p0, Lco/median/android/DeviceLicenseManager$4;->val$forceUpdate:Z
+
+    iput-object p4, p0, Lco/median/android/DeviceLicenseManager$4;->val$dialog:Landroid/app/AlertDialog;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
 
@@ -48,55 +52,63 @@
 
 
 # virtual methods
-.method public onClick(Landroid/content/DialogInterface;I)V
-    .locals 1
+.method public onClick(Landroid/view/View;)V
+    .locals 2
 
-    .line 197
+    .line 450
     :try_start_0
     new-instance p1, Landroid/content/Intent;
 
-    const-string p2, "android.intent.action.VIEW"
+    const-string v0, "android.intent.action.VIEW"
 
-    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$4;->val$downloadUrl:Ljava/lang/String;
+    iget-object v1, p0, Lco/median/android/DeviceLicenseManager$4;->val$downloadUrl:Ljava/lang/String;
 
-    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-direct {p1, p2, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+    invoke-direct {p1, v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
 
-    .line 198
-    iget-object p2, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
+    .line 451
+    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
 
-    invoke-virtual {p2, p1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+    invoke-virtual {v0, p1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_0
 
     goto :goto_0
 
-    .line 199
+    .line 452
     :catch_0
     move-exception p1
 
     :goto_0
     nop
 
-    .line 200
+    .line 453
     iget-boolean p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$forceUpdate:Z
 
     if-eqz p1, :cond_0
 
-    .line 201
+    .line 454
     iget-object p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {p1}, Landroid/app/Activity;->finishAffinity()V
 
-    .line 202
+    .line 455
     const/4 p1, 0x0
 
     invoke-static {p1}, Ljava/lang/System;->exit(I)V
 
-    .line 204
+    goto :goto_1
+
+    .line 457
     :cond_0
+    iget-object p1, p0, Lco/median/android/DeviceLicenseManager$4;->val$dialog:Landroid/app/AlertDialog;
+
+    invoke-virtual {p1}, Landroid/app/AlertDialog;->dismiss()V
+
+    .line 459
+    :goto_1
     return-void
 .end method

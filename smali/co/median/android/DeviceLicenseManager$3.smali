@@ -3,12 +3,12 @@
 .source "DeviceLicenseManager.java"
 
 # interfaces
-.implements Landroid/content/DialogInterface$OnClickListener;
+.implements Landroid/view/View$OnClickListener;
 
 
 # annotations
 .annotation system Ldalvik/annotation/EnclosingMethod;
-    value = Lco/median/android/DeviceLicenseManager;->showUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
+    value = Lco/median/android/DeviceLicenseManager;->showThemedUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
 .end annotation
 
 .annotation system Ldalvik/annotation/InnerClass;
@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 167
+    .line 346
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$3;->val$activity:Landroid/app/Activity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -40,19 +40,19 @@
 
 
 # virtual methods
-.method public onClick(Landroid/content/DialogInterface;I)V
+.method public onClick(Landroid/view/View;)V
     .locals 0
 
-    .line 170
+    .line 349
     iget-object p1, p0, Lco/median/android/DeviceLicenseManager$3;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {p1}, Landroid/app/Activity;->finishAffinity()V
 
-    .line 171
+    .line 350
     const/4 p1, 0x0
 
     invoke-static {p1}, Ljava/lang/System;->exit(I)V
 
-    .line 172
+    .line 351
     return-void
 .end method

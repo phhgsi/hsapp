@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 37
+    .line 48
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,426 +43,304 @@
 .method public run()V
     .locals 14
 
-    .line 41
+    .line 52
     const-string v0, "update_config"
 
     const-string v1, "contact_message"
 
+    const-string v2, "DeviceLicenseManager"
+
     :try_start_0
-    iget-object v2, p0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
+    iget-object v3, p0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
 
-    invoke-virtual {v2}, Landroid/app/Activity;->getContentResolver()Landroid/content/ContentResolver;
-
-    move-result-object v2
-
-    const-string v3, "android_id"
-
-    invoke-static {v2, v3}, Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 42
-    if-nez v2, :cond_0
-
-    const-string v2, "UNKNOWN_DEVICE"
-
-    .line 43
-    :cond_0
-    invoke-virtual {v2}, Ljava/lang/String;->trim()Ljava/lang/String;
-
-    move-result-object v6
-
-    .line 45
-    sget-object v2, Lco/median/android/DeviceLicenseManager;->LICENSE_URL:Ljava/lang/String;
-
-    invoke-static {}, Ljava/lang/System;->currentTimeMillis()J
-
-    move-result-wide v3
-
-    new-instance v5, Ljava/lang/StringBuilder;
-
-    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-
-    invoke-virtual {v5, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    const-string v5, "?t="
-
-    invoke-virtual {v2, v5}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2, v3, v4}, Ljava/lang/StringBuilder;->append(J)Ljava/lang/StringBuilder;
-
-    move-result-object v2
-
-    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v2
-
-    .line 46
-    new-instance v3, Ljava/net/URL;
-
-    invoke-direct {v3, v2}, Ljava/net/URL;-><init>(Ljava/lang/String;)V
-
-    .line 47
-    invoke-virtual {v3}, Ljava/net/URL;->openConnection()Ljava/net/URLConnection;
-
-    move-result-object v2
-
-    check-cast v2, Ljava/net/HttpURLConnection;
-
-    .line 48
-    const-string v3, "GET"
-
-    invoke-virtual {v2, v3}, Ljava/net/HttpURLConnection;->setRequestMethod(Ljava/lang/String;)V
-
-    .line 49
-    const-string v3, "Cache-Control"
-
-    const-string v4, "no-cache, no-store, must-revalidate"
-
-    invoke-virtual {v2, v3, v4}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 50
-    const-string v3, "Pragma"
-
-    const-string v4, "no-cache"
-
-    invoke-virtual {v2, v3, v4}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 51
-    const-string v3, "Expires"
-
-    const-string v4, "0"
-
-    invoke-virtual {v2, v3, v4}, Ljava/net/HttpURLConnection;->setRequestProperty(Ljava/lang/String;Ljava/lang/String;)V
-
-    .line 52
-    const/16 v3, 0xfa0
-
-    invoke-virtual {v2, v3}, Ljava/net/HttpURLConnection;->setConnectTimeout(I)V
-
-    .line 53
-    invoke-virtual {v2, v3}, Ljava/net/HttpURLConnection;->setReadTimeout(I)V
-
-    .line 55
-    nop
-
-    .line 56
-    nop
-
-    .line 57
-    nop
-
-    .line 58
-    const-string v3, "New Update Available!"
-
-    .line 59
-    const-string v4, "A new version of the app is available. Please update to continue using the app."
-
-    .line 60
-    const-string v5, "https://github.com/phhgsi/hsapp/releases"
-
-    .line 61
-    nop
-
-    .line 62
-    nop
-
-    .line 64
-    invoke-virtual {v2}, Ljava/net/HttpURLConnection;->getResponseCode()I
-
-    move-result v7
-
-    .line 65
-    const/16 v8, 0xc8
-
-    const/4 v9, 0x1
-
-    const/4 v10, 0x0
-
-    const/4 v11, 0x0
-
-    if-ne v7, v8, :cond_7
-
-    .line 66
-    new-instance v7, Ljava/io/BufferedReader;
-
-    new-instance v8, Ljava/io/InputStreamReader;
-
-    invoke-virtual {v2}, Ljava/net/HttpURLConnection;->getInputStream()Ljava/io/InputStream;
-
-    move-result-object v12
-
-    invoke-direct {v8, v12}, Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream;)V
-
-    invoke-direct {v7, v8}, Ljava/io/BufferedReader;-><init>(Ljava/io/Reader;)V
-
-    .line 67
-    new-instance v8, Ljava/lang/StringBuilder;
-
-    invoke-direct {v8}, Ljava/lang/StringBuilder;-><init>()V
-
-    .line 69
-    :goto_0
-    invoke-virtual {v7}, Ljava/io/BufferedReader;->readLine()Ljava/lang/String;
-
-    move-result-object v12
-
-    if-eqz v12, :cond_1
-
-    .line 70
-    invoke-virtual {v8, v12}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    goto :goto_0
-
-    .line 72
-    :cond_1
-    invoke-virtual {v7}, Ljava/io/BufferedReader;->close()V
-
-    .line 74
-    new-instance v7, Lorg/json/JSONObject;
-
-    invoke-virtual {v8}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-
-    move-result-object v8
-
-    invoke-direct {v7, v8}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
-
-    .line 77
-    const-string v8, "global_access"
-
-    invoke-virtual {v7, v8, v10}, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String;Z)Z
-
-    move-result v8
-
-    .line 78
-    if-eqz v8, :cond_2
-
-    .line 79
-    const/4 v8, 0x1
-
-    goto :goto_2
-
-    .line 81
-    :cond_2
-    const-string v8, "allowed_devices"
-
-    invoke-virtual {v7, v8}, Lorg/json/JSONObject;->optJSONArray(Ljava/lang/String;)Lorg/json/JSONArray;
-
-    move-result-object v8
-
-    .line 82
-    if-eqz v8, :cond_4
-
-    .line 83
-    const/4 v12, 0x0
-
-    :goto_1
-    invoke-virtual {v8}, Lorg/json/JSONArray;->length()I
-
-    move-result v13
-
-    if-ge v12, v13, :cond_4
-
-    .line 84
-    const-string v13, ""
-
-    invoke-virtual {v8, v12, v13}, Lorg/json/JSONArray;->optString(ILjava/lang/String;)Ljava/lang/String;
-
-    move-result-object v13
-
-    invoke-virtual {v13}, Ljava/lang/String;->trim()Ljava/lang/String;
-
-    move-result-object v13
-
-    .line 85
-    invoke-virtual {v6, v13}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
-
-    move-result v13
-
-    if-eqz v13, :cond_3
-
-    .line 86
-    nop
-
-    .line 87
-    const/4 v8, 0x1
-
-    goto :goto_2
-
-    .line 83
-    :cond_3
-    add-int/lit8 v12, v12, 0x1
-
-    goto :goto_1
-
-    .line 93
-    :cond_4
-    const/4 v8, 0x0
-
-    :goto_2
-    invoke-virtual {v7, v1}, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
-
-    move-result v12
-
-    if-eqz v12, :cond_5
-
-    .line 94
-    invoke-virtual {v7, v1}, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
-
-    move-result-object v1
-
-    const-string v11, "{DEVICE_ID}"
-
-    invoke-virtual {v1, v11, v6}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
-
-    move-result-object v11
-
-    .line 98
-    :cond_5
-    invoke-virtual {v7, v0}, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
-
-    move-result v1
-
-    if-eqz v1, :cond_6
-
-    .line 99
-    nop
-
-    .line 100
-    invoke-virtual {v7, v0}, Lorg/json/JSONObject;->getJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
-
-    move-result-object v0
-
-    .line 101
-    const-string v1, "latest_version_code"
-
-    invoke-virtual {v0, v1, v10}, Lorg/json/JSONObject;->optInt(Ljava/lang/String;I)I
-
-    move-result v1
-
-    .line 102
-    const-string v7, "update_title"
-
-    invoke-virtual {v0, v7, v3}, Lorg/json/JSONObject;->optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    invoke-virtual {v3}, Landroid/app/Activity;->getContentResolver()Landroid/content/ContentResolver;
 
     move-result-object v3
 
-    .line 103
-    const-string v7, "update_message"
+    const-string v4, "android_id"
 
-    invoke-virtual {v0, v7, v4}, Lorg/json/JSONObject;->optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    invoke-static {v3, v4}, Landroid/provider/Settings$Secure;->getString(Landroid/content/ContentResolver;Ljava/lang/String;)Ljava/lang/String;
 
-    move-result-object v4
+    move-result-object v3
 
-    .line 104
-    const-string v7, "apk_download_url"
+    .line 53
+    if-nez v3, :cond_0
 
-    invoke-virtual {v0, v7, v5}, Lorg/json/JSONObject;->optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+    const-string v3, "UNKNOWN_DEVICE"
 
-    move-result-object v5
+    .line 54
+    :cond_0
+    invoke-virtual {v3}, Ljava/lang/String;->trim()Ljava/lang/String;
 
-    .line 105
-    const-string v7, "force_update"
+    move-result-object v7
 
-    invoke-virtual {v0, v7, v10}, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String;Z)Z
+    .line 56
+    invoke-static {}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smfetchContentFromGitHub()Ljava/lang/String;
 
-    move-result v0
+    move-result-object v3
 
-    move v12, v0
+    .line 57
+    if-eqz v3, :cond_9
 
-    move-object v0, v11
+    invoke-virtual {v3}, Ljava/lang/String;->isEmpty()Z
 
-    const/4 v7, 0x1
+    move-result v4
 
-    move-object v11, v5
+    if-eqz v4, :cond_1
 
-    move v5, v8
+    goto/16 :goto_7
 
-    goto :goto_3
+    .line 62
+    :cond_1
+    new-instance v4, Lorg/json/JSONObject;
 
-    .line 98
-    :cond_6
-    move-object v0, v11
-
-    const/4 v1, 0x0
-
-    const/4 v7, 0x0
-
-    const/4 v12, 0x0
-
-    move-object v11, v5
-
-    move v5, v8
-
-    goto :goto_3
+    invoke-direct {v4, v3}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
 
     .line 65
-    :cond_7
-    move-object v0, v11
+    nop
 
-    const/4 v1, 0x0
-
-    const/4 v7, 0x0
-
-    const/4 v12, 0x0
-
-    move-object v11, v5
+    .line 66
+    const-string v3, "global_access"
 
     const/4 v5, 0x0
 
-    .line 108
-    :goto_3
-    invoke-virtual {v2}, Ljava/net/HttpURLConnection;->disconnect()V
+    invoke-virtual {v4, v3, v5}, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String;Z)Z
 
-    .line 110
+    move-result v3
+
+    .line 67
+    const/4 v6, 0x1
+
+    if-eqz v3, :cond_2
+
+    .line 68
+    const/4 v3, 0x1
+
+    goto :goto_1
+
+    .line 70
+    :cond_2
+    const-string v3, "allowed_devices"
+
+    invoke-virtual {v4, v3}, Lorg/json/JSONObject;->optJSONArray(Ljava/lang/String;)Lorg/json/JSONArray;
+
+    move-result-object v3
+
+    .line 71
+    if-eqz v3, :cond_4
+
+    .line 72
+    const/4 v8, 0x0
+
+    :goto_0
+    invoke-virtual {v3}, Lorg/json/JSONArray;->length()I
+
+    move-result v9
+
+    if-ge v8, v9, :cond_4
+
+    .line 73
+    const-string v9, ""
+
+    invoke-virtual {v3, v8, v9}, Lorg/json/JSONArray;->optString(ILjava/lang/String;)Ljava/lang/String;
+
+    move-result-object v9
+
+    invoke-virtual {v9}, Ljava/lang/String;->trim()Ljava/lang/String;
+
+    move-result-object v9
+
+    .line 74
+    invoke-virtual {v7, v9}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+
+    move-result v9
+
+    if-eqz v9, :cond_3
+
+    .line 75
     nop
 
-    .line 111
-    if-eqz v0, :cond_8
+    .line 76
+    const/4 v3, 0x1
 
-    move-object v2, v0
+    goto :goto_1
+
+    .line 72
+    :cond_3
+    add-int/lit8 v8, v8, 0x1
+
+    goto :goto_0
+
+    .line 82
+    :cond_4
+    const/4 v3, 0x1
+
+    const/4 v6, 0x0
+
+    :goto_1
+    nop
+
+    .line 83
+    invoke-virtual {v4, v1}, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
+
+    move-result v8
+
+    if-eqz v8, :cond_5
+
+    .line 84
+    invoke-virtual {v4, v1}, Lorg/json/JSONObject;->getString(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v8, "{DEVICE_ID}"
+
+    invoke-virtual {v1, v8, v7}, Ljava/lang/String;->replace(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)Ljava/lang/String;
+
+    move-result-object v1
+
+    goto :goto_2
+
+    .line 83
+    :cond_5
+    const/4 v1, 0x0
+
+    .line 88
+    :goto_2
+    nop
+
+    .line 89
+    const-string v8, "New Update Available!"
+
+    .line 90
+    const-string v9, "A new version of the app is available. Please update to continue using the app."
+
+    .line 91
+    const-string v10, "https://github.com/phhgsi/hsapp/releases"
+
+    .line 92
+    nop
+
+    .line 93
+    nop
+
+    .line 95
+    invoke-virtual {v4, v0}, Lorg/json/JSONObject;->has(Ljava/lang/String;)Z
+
+    move-result v11
+
+    if-eqz v11, :cond_6
+
+    .line 96
+    nop
+
+    .line 97
+    invoke-virtual {v4, v0}, Lorg/json/JSONObject;->getJSONObject(Ljava/lang/String;)Lorg/json/JSONObject;
+
+    move-result-object v0
+
+    .line 98
+    const-string v4, "latest_version_code"
+
+    invoke-virtual {v0, v4, v5}, Lorg/json/JSONObject;->optInt(Ljava/lang/String;I)I
+
+    move-result v4
+
+    .line 99
+    const-string v11, "update_title"
+
+    invoke-virtual {v0, v11, v8}, Lorg/json/JSONObject;->optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v8
+
+    .line 100
+    const-string v11, "update_message"
+
+    invoke-virtual {v0, v11, v9}, Lorg/json/JSONObject;->optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v9
+
+    .line 101
+    const-string v11, "apk_download_url"
+
+    invoke-virtual {v0, v11, v10}, Lorg/json/JSONObject;->optString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v10
+
+    .line 102
+    const-string v11, "force_update"
+
+    invoke-virtual {v0, v11, v5}, Lorg/json/JSONObject;->optBoolean(Ljava/lang/String;Z)Z
+
+    move-result v0
+
+    move v13, v0
+
+    move-object v12, v10
+
+    move-object v10, v8
+
+    const/4 v8, 0x1
+
+    move-object v11, v9
+
+    goto :goto_3
+
+    .line 95
+    :cond_6
+    move-object v12, v10
+
+    const/4 v4, 0x0
+
+    const/4 v13, 0x0
+
+    move-object v10, v8
+
+    const/4 v8, 0x0
+
+    move-object v11, v9
+
+    .line 105
+    :goto_3
+    nop
+
+    .line 106
+    if-eqz v1, :cond_7
 
     goto :goto_4
 
-    .line 112
-    :cond_8
+    .line 107
+    :cond_7
     new-instance v0, Ljava/lang/StringBuilder;
 
     invoke-direct {v0}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v2, "Access Denied!\n\nYour Device ID: "
+    const-string v1, "Access Denied!\n\nYour Device ID: "
 
-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-
-    move-result-object v0
-
-    invoke-virtual {v0, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v0
 
-    const-string v2, "\n\nThis device is not authorized to use this app. Please contact the developer to activate access."
+    invoke-virtual {v0, v7}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
-    invoke-virtual {v0, v2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+    move-result-object v0
+
+    const-string v1, "\n\nThis device is not authorized to use this app. Please contact the developer to activate access."
+
+    invoke-virtual {v0, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
     move-result-object v0
 
     invoke-virtual {v0}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
 
-    move-result-object v0
+    move-result-object v1
     :try_end_0
     .catch Ljava/lang/Exception; {:try_start_0 .. :try_end_0} :catch_1
 
-    move-object v2, v0
-
-    .line 114
+    .line 109
     :goto_4
     nop
 
-    .line 116
+    .line 111
     :try_start_1
     iget-object v0, p0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
 
@@ -470,22 +348,22 @@
 
     move-result-object v0
 
-    iget-object v8, p0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
+    iget-object v9, p0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
 
-    invoke-virtual {v8}, Landroid/app/Activity;->getPackageName()Ljava/lang/String;
+    invoke-virtual {v9}, Landroid/app/Activity;->getPackageName()Ljava/lang/String;
 
-    move-result-object v8
+    move-result-object v9
 
-    invoke-virtual {v0, v8, v10}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
+    invoke-virtual {v0, v9, v5}, Landroid/content/pm/PackageManager;->getPackageInfo(Ljava/lang/String;I)Landroid/content/pm/PackageInfo;
 
     move-result-object v0
 
-    .line 117
+    .line 112
     iget v0, v0, Landroid/content/pm/PackageInfo;->versionCode:I
     :try_end_1
     .catch Ljava/lang/Exception; {:try_start_1 .. :try_end_1} :catch_0
 
-    .line 118
+    .line 113
     goto :goto_5
 
     :catch_0
@@ -493,73 +371,77 @@
 
     const/4 v0, 0x0
 
-    .line 120
+    .line 115
     :goto_5
-    if-eqz v7, :cond_9
+    if-eqz v8, :cond_8
 
-    if-le v1, v0, :cond_9
+    if-le v4, v0, :cond_8
 
-    const/4 v8, 0x1
+    const/4 v9, 0x1
 
     goto :goto_6
 
-    :cond_9
-    const/4 v8, 0x0
+    :cond_8
+    const/4 v9, 0x0
 
-    .line 121
+    .line 116
     :goto_6
     nop
 
-    .line 122
+    .line 117
     nop
 
-    .line 123
+    .line 118
     nop
 
-    .line 124
+    .line 119
     nop
 
-    .line 126
+    .line 121
     :try_start_2
     new-instance v0, Landroid/os/Handler;
 
     invoke-static {}, Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
 
-    move-result-object v1
+    move-result-object v3
 
-    invoke-direct {v0, v1}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
+    invoke-direct {v0, v3}, Landroid/os/Handler;-><init>(Landroid/os/Looper;)V
 
-    move-object v9, v3
+    new-instance v4, Lco/median/android/DeviceLicenseManager$1$1;
 
-    new-instance v3, Lco/median/android/DeviceLicenseManager$1$1;
+    move-object v5, p0
 
-    move-object v7, v2
+    move-object v8, v1
 
-    move-object v10, v4
+    invoke-direct/range {v4 .. v13}, Lco/median/android/DeviceLicenseManager$1$1;-><init>(Lco/median/android/DeviceLicenseManager$1;ZLjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
 
-    move-object v4, p0
+    invoke-virtual {v0, v4}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
 
-    invoke-direct/range {v3 .. v12}, Lco/median/android/DeviceLicenseManager$1$1;-><init>(Lco/median/android/DeviceLicenseManager$1;ZLjava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+    .line 134
+    goto :goto_8
 
-    invoke-virtual {v0, v3}, Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z
+    .line 58
+    :cond_9
+    :goto_7
+    const-string v0, "Empty JSON response from GitHub endpoints"
+
+    invoke-static {v2, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
     :try_end_2
     .catch Ljava/lang/Exception; {:try_start_2 .. :try_end_2} :catch_1
 
-    .line 139
-    goto :goto_7
+    .line 59
+    return-void
 
-    .line 137
+    .line 132
     :catch_1
     move-exception v0
 
-    .line 138
-    const-string v1, "DeviceLicenseManager"
+    .line 133
+    const-string v1, "Error checking license/updates"
 
-    const-string v2, "Error checking license/updates"
+    invoke-static {v2, v1, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
 
-    invoke-static {v1, v2, v0}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
-
-    .line 140
-    :goto_7
+    .line 135
+    :goto_8
     return-void
 .end method

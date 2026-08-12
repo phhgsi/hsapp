@@ -46,7 +46,7 @@
         }
     .end annotation
 
-    .line 126
+    .line 121
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
 
     iput-boolean p2, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$allowed:Z
@@ -75,12 +75,12 @@
 .method public run()V
     .locals 5
 
-    .line 129
+    .line 124
     iget-boolean v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$allowed:Z
 
     if-nez v0, :cond_0
 
-    .line 130
+    .line 125
     iget-object v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
 
     iget-object v0, v0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
@@ -89,17 +89,17 @@
 
     iget-object v2, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$messageToShow:Ljava/lang/String;
 
-    invoke-static {v0, v1, v2}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
+    invoke-static {v0, v1, v2}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowThemedUnauthorizedDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;)V
 
     goto :goto_0
 
-    .line 131
+    .line 126
     :cond_0
     iget-boolean v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$hasNewUpdate:Z
 
     if-eqz v0, :cond_1
 
-    .line 132
+    .line 127
     iget-object v0, p0, Lco/median/android/DeviceLicenseManager$1$1;->this$0:Lco/median/android/DeviceLicenseManager$1;
 
     iget-object v0, v0, Lco/median/android/DeviceLicenseManager$1;->val$activity:Landroid/app/Activity;
@@ -112,9 +112,9 @@
 
     iget-boolean v4, p0, Lco/median/android/DeviceLicenseManager$1$1;->val$finalForceUpdate:Z
 
-    invoke-static {v0, v1, v2, v3, v4}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowUpdateDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
+    invoke-static {v0, v1, v2, v3, v4}, Lco/median/android/DeviceLicenseManager;->-$$Nest$smshowThemedUpdateDialog(Landroid/app/Activity;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)V
 
-    .line 134
+    .line 129
     :cond_1
     :goto_0
     return-void
