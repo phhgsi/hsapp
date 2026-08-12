@@ -30,7 +30,7 @@
         }
     .end annotation
 
-    .line 147
+    .line 171
     iput-object p1, p0, Lco/median/android/DeviceLicenseManager$3;->val$activity:Landroid/app/Activity;
 
     invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -43,16 +43,16 @@
 .method public onClick(Landroid/content/DialogInterface;I)V
     .locals 0
 
-    .line 150
+    .line 174
     iget-object p1, p0, Lco/median/android/DeviceLicenseManager$3;->val$activity:Landroid/app/Activity;
 
     invoke-virtual {p1}, Landroid/app/Activity;->finishAffinity()V
 
-    .line 151
+    .line 175
     const/4 p1, 0x0
 
     invoke-static {p1}, Ljava/lang/System;->exit(I)V
 
-    .line 152
+    .line 176
     return-void
 .end method
