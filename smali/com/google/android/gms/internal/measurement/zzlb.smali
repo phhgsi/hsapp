@@ -1,0 +1,21 @@
+.class public interface abstract Lcom/google/android/gms/internal/measurement/zzlb;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+# interfaces
+.implements Lcom/google/android/gms/internal/measurement/zzle;
+.implements Ljava/lang/Cloneable;
+
+
+# virtual methods
+.method public abstract zza([B)Lcom/google/android/gms/internal/measurement/zzlb;
+.end method
+
+.method public abstract zza([BLcom/google/android/gms/internal/measurement/zzjg;)Lcom/google/android/gms/internal/measurement/zzlb;
+.end method
+
+.method public abstract zzai()Lcom/google/android/gms/internal/measurement/zzlc;
+.end method
+
+.method public abstract zzaj()Lcom/google/android/gms/internal/measurement/zzlc;
+.end method

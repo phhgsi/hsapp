@@ -1,0 +1,390 @@
+{
+  "general": {
+    "screenOrientation": {
+      "iphone": "portrait",
+      "ipad": "portrait",
+      "androidPhone": "portrait",
+      "androidTablet": "portrait"
+    },
+    "userAgentRegexes": [],
+    "replaceStrings": [],
+    "nativeBridgeUrls": [],
+    "languages": [],
+    "userAgentAdd": "",
+    "enableWindowOpen": true,
+    "forceUserAgent": "",
+    "publicKey": "jrejze",
+    "deviceRegKey": "76gpzt2a059d7w5z3dcbyph1pg",
+    "appName": "हमारे-शिक्षक",
+    "initialUrl": "https://shikshak.educationportal3.in/",
+    "androidPackageName": "co.median.android.jrejze",
+    "iosBundleId": "co.median.ios.jrejze",
+    "keepScreenOn": true,
+    "iosUserAgentAdd": "median",
+    "iosForceUserAgent": "",
+    "androidUserAgentAdd": "",
+    "androidForceUserAgent": "Mozilla/5.0 (Linux; Android 12; Pixel 6 Build/SD1A.210817.023; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/94.0.4606.71 Mobile Safari/537.36",
+    "androidSigningKey": "release",
+    "injectMedianJS": true,
+    "forceSessionCookieExpiry": 0,
+    "iosFullScreenWebview": true,
+    "androidFullScreen": true,
+    "iosVersionName": "1.1.0",
+    "androidVersionName": "1.1.0",
+    "iosCustomHeaders": {},
+    "androidCustomHeaders": {},
+    "version": 40
+  },
+  "navigation": {
+    "tabNavigation": {
+      "tabSelectionConfig": [],
+      "tabMenus": [],
+      "active": false
+    },
+    "sidebarNavigation": {
+      "menuSelectionConfig": {
+        "redirectLocations": [
+          {
+            "regex": ".*",
+            "menuName": "default",
+            "loggedIn": true
+          }
+        ]
+      },
+      "menus": [
+        {
+          "active": false,
+          "name": "default",
+          "items": []
+        }
+      ]
+    },
+    "regexInternalExternal": {
+      "rules": [
+        {
+          "regex": "^(?!https?://).*",
+          "mode": "external",
+          "label": "Non-web links",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://([-\\w]+\\.)*facebook\\.com.*",
+          "mode": "appbrowser",
+          "label": "Facebook",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://([\\-\\w]+\\.)*(twitter|x)\\.com/.*",
+          "mode": "appbrowser",
+          "label": "Twitter/X",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://([-\\w]+\\.)*instagram\\.com/.*",
+          "mode": "appbrowser",
+          "label": "Instagram",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://maps\\.google\\.com.*",
+          "mode": "appbrowser",
+          "label": "Google Maps",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://([-\\w]+\\.)*google\\.com/maps/search/.*",
+          "mode": "appbrowser",
+          "label": "Google Maps Search",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://([-\\w]+\\.)*linkedin\\.com/.*",
+          "mode": "appbrowser",
+          "label": "LinkedIn",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?://login\\.microsoftonline\\.com.*",
+          "mode": "internal",
+          "label": "Microsoft Login",
+          "pagesToTrigger": "custom"
+        },
+        {
+          "regex": "https?:\\/\\/([-\\w]+\\.)*educationportal3.in(\\/.*)?$",
+          "mode": "internal",
+          "label": "All pages on my domain",
+          "pagesToTrigger": "domain"
+        },
+        {
+          "regex": "https?:\\/\\/([-\\w]+\\.)*educationportal3\\.mp\\.gov\\.in(\\/.*)?$",
+          "mode": "internal",
+          "label": "All pages on mp.gov.in domain",
+          "pagesToTrigger": "domain"
+        },
+        {
+          "regex": ".*",
+          "mode": "appbrowser",
+          "label": "All Other Links",
+          "pagesToTrigger": "all"
+        }
+      ],
+      "active": true
+    },
+    "androidPullToRefresh": true,
+    "iosPullToRefresh": true,
+    "navigationTitles": {
+      "active": true,
+      "titles": []
+    },
+    "ignorePageFinishedRegexes": [],
+    "actionConfig": {
+      "actions": [],
+      "actionSelection": [],
+      "active": true
+    },
+    "androidShowRefreshButton": false,
+    "iosShowRefreshButton": false,
+    "deepLinkDomains": {
+      "domains": [
+        "shikshak.educationportal3.in",
+        "hamareshikshak.educationportal3.mp.gov.in"
+      ],
+      "enableAndroidApplinks": false
+    },
+    "navigationLevels": {
+      "active": true,
+      "levels": []
+    },
+    "toolbarNavigation": {
+      "enabled": false,
+      "visibilityByPages": "allPages",
+      "visibilityByBackButton": "backButtonActive",
+      "regexes": [
+        {
+          "enabled": true,
+          "regex": ".*"
+        }
+      ],
+      "items": [
+        {
+          "system": "back",
+          "titleType": "defaultText",
+          "visibility": "allPages",
+          "urlRegex": [
+            {
+              "enabled": true,
+              "regex": ".*"
+            }
+          ]
+        },
+        {
+          "system": "refresh",
+          "enabled": false,
+          "visibility": "allPages",
+          "urlRegex": [
+            {
+              "enabled": true,
+              "regex": ".*"
+            }
+          ]
+        },
+        {
+          "system": "forward",
+          "enabled": false,
+          "titleType": "defaultText",
+          "visibility": "allPages",
+          "urlRegex": [
+            {
+              "enabled": true,
+              "regex": ".*"
+            }
+          ]
+        }
+      ]
+    },
+    "redirects": [],
+    "iosShowOfflinePage": true,
+    "iosConnectionOfflineTime": 10,
+    "androidShowOfflinePage": true,
+    "androidConnectionOfflineTime": 10,
+    "iosSettings": {},
+    "swipeGestures": true,
+    "maxWindows": {
+      "enabled": false,
+      "numWindows": 5,
+      "autoClose": false
+    }
+  },
+  "styling": {
+    "splashScreen": {
+      "ios": {
+        "animationLoop": "once",
+        "backgroundColor": "#FFFFFF",
+        "backgroundColorDark": "#0E0D08",
+        "backgroundImage": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654073_7zkz2akb6xb1m_FFFFFF_1_2x2.png",
+        "backgroundImageDark": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654086_kzk51tf3qbtrc_0E0D08_1_2x2.png",
+        "animated": false,
+        "centerImage": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/Logo_Dark_1747668342513.jpeg",
+        "centerImageDark": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/Logo_Light_1747668334810.png",
+        "animation": null,
+        "animationDark": null,
+        "animationFrame": null,
+        "animationFrameDark": null
+      },
+      "android": {
+        "showSplash": true,
+        "animationLoop": "once",
+        "backgroundColor": "#FFFFFF",
+        "backgroundColorDark": "#0E0D08",
+        "animated": false,
+        "launchImages": {
+          "mdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654341_h0duhy679k35g_180x180.png",
+          "hdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654355_qmwk79nz7wf7y_270x270.png",
+          "xhdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654363_775xutxxgvp1m_360x360.png",
+          "xxhdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654375_4bk65dx0ta118_540x540.png",
+          "xxxhdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654392_70rbdf68bapa2_720x720.png"
+        },
+        "launchImagesDark": {
+          "mdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654444_vp971gtpx5zbw_180x180.png",
+          "hdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654477_tpaebwdpmgc5r_270x270.png",
+          "xhdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654517_9rah4cncuavr6_360x360.png",
+          "xxhdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654588_gxcju1hjuzkqy_540x540.png",
+          "xxxhdpi": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/1747668654602_db4r6mj7d0ytj_720x720.png"
+        },
+        "animation": null,
+        "animationDark": null,
+        "animationFrame": null,
+        "animationFrameDark": null
+      }
+    },
+    "transitionInteractiveDelayMax": 0.2,
+    "menuAnimationDuration": 0.15,
+    "disableAnimations": false,
+    "hideWebviewAlpha": 0.5,
+    "iosDarkMode": "auto",
+    "iosTitleColor": "#0E0D08",
+    "iosTitleColorDark": "#ffffff",
+    "iosTintColor": "#0E0D08",
+    "iosTintColorDark": "#ffffff",
+    "iosSidebarTextColor": "#0E0D08",
+    "iosSidebarTextColorDark": "#ffffff",
+    "iosStatusBarBackgroundColor": "#ffffffff",
+    "iosStatusBarBackgroundColorDark": "#000000",
+    "iosEnableBlurInStatusBar": false,
+    "iosSidebarBackgroundColor": "#f8f8f8",
+    "iosSidebarBackgroundColorDark": "#202020",
+    "iosNavigationBarTintColor": "#f8f8f8",
+    "iosNavigationBarTintColorDark": "#202020",
+    "iosTabBarTintColor": "#f8f8f8",
+    "iosTabBarTintColorDark": "#000000",
+    "iosTabBarInactiveColor": "#A1A1A1",
+    "iosTabBarInactiveColorDark": "#818181",
+    "icon": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_ios_1747668197690.png",
+    "iosHeaderImage": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_ios_1747668197690.png",
+    "showActionBar": false,
+    "showNavigationBar": false,
+    "iosSidebarFont": "Default",
+    "androidHideTitleInActionBar": false,
+    "navigationTitleImage": false,
+    "iosTheme": "default",
+    "androidTheme": "auto",
+    "androidBackgroundColor": "#FFFFFF",
+    "androidSidebarBackgroundColor": "#FFFFFF",
+    "androidSidebarForegroundColor": "#1A100B",
+    "androidActionBarBackgroundColor": "#FFFFFF",
+    "androidActionBarForegroundColor": "#1A100B",
+    "androidPullToRefreshColor": "#1A100B",
+    "androidAccentColor": "#2f9ac7",
+    "androidSidebarSeparatorColor": "#CCCCCC",
+    "androidSidebarHighlightColor": "#1A100B",
+    "androidTabBarBackgroundColor": "#FFFFFF",
+    "androidTabBarTextColor": "#949494",
+    "androidTabBarIndicatorColor": "#9169f3",
+    "androidTabPressedBackgroundColor": "#CCCCCC",
+    "androidStatusBarBackgroundColor": "#5C5C5C",
+    "androidShowLogoInSideBar": true,
+    "androidShowAppNameInSideBar": true,
+    "androidSwipeNavigationBackgroundColor": "#FFFFFF",
+    "androidSwipeNavigationActiveColor": "#000000",
+    "androidSwipeNavigationInactiveColor": "#666666",
+    "androidActionBarBackgroundColorDark": "#333333",
+    "androidStatusBarBackgroundColorDark": "#333333",
+    "androidActionBarForegroundColorDark": "#FFFFFF",
+    "androidAccentColorDark": "#2f9ac7",
+    "androidBackgroundColorDark": "#333333",
+    "androidSidebarForegroundColorDark": "#FFFFFF",
+    "androidSidebarBackgroundColorDark": "#333333",
+    "androidSidebarSeparatorColorDark": "#666666",
+    "androidSidebarHighlightColorDark": "#FFFFFF",
+    "androidPullToRefreshColorDark": "#FFFFFF",
+    "androidTabBarTextColorDark": "#FFFFFF",
+    "androidTabBarBackgroundColorDark": "#333333",
+    "androidTabBarIndicatorColorDark": "#f8ee7a",
+    "androidTabPressedBackgroundColorDark": "#999999",
+    "androidSwipeNavigationBackgroundColorDark": "#333333",
+    "androidSwipeNavigationActiveColorDark": "#FFFFFF",
+    "androidSwipeNavigationInactiveColorDark": "#666666",
+    "androidSystemNavBarColor": "#FFFFFF",
+    "androidSystemNavBarColorDark": "#000000",
+    "androidWebviewTextZoom": null,
+    "iosIcon": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_ios_1747668197690.png",
+    "customIcons": {
+      "fontelloSessionId": "0ef35e94bad5fdbff8a38a855f613cb4"
+    },
+    "iosStatusBarStyle": "auto",
+    "iosEnableOverlayInStatusBar": false,
+    "androidStatusBarStyle": "auto",
+    "androidEnableOverlayInStatusBar": false,
+    "androidIcon": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_android_1747668220455.png",
+    "iosActivityIndicatorColor": "#808080",
+    "iosActivityIndicatorColorDark": "#808080",
+    "androidActivityIndicatorColor": "#808080",
+    "androidActivityIndicatorColorDark": "#808080",
+    "forceViewportWidth": null,
+    "pinchToZoom": null,
+    "iosDynamicType": true,
+    "navigationTitleImageLocation": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_ios_1747668197690.png",
+    "navigationTitleImageLocationDark": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_ios_1747668197690.png",
+    "androidHeaderImage": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_android_1747668220455.png",
+    "androidHeaderImageDark": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_android_1747668220455.png",
+    "iosHeaderImageDark": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/app_icon_ios_1747668197690.png",
+    "androidNotificationIcon": "https://s3.amazonaws.com/gonativeio/app_files/jrejze/onesignal_icon_android.png?versionId=oBeQApXAxVy0I8E4aP4EQ9iHBtbD_zjf",
+    "androidInitialZoom": 1,
+    "iosInitialZoom": 1
+  },
+  "permissions": {
+    "usesGeolocation": true,
+    "androidDownloadToPublicStorage": true,
+    "enableWebRTCamera": true,
+    "enableWebRTCMicrophone": true,
+    "iosLocationUsageDescription": "हमारे-शिक्षक  needs access to your location for Attendance",
+    "iosCameraUsageDescription": "हमारे-शिक्षक needs access to your camera to upload photos and mark your Attendance.",
+    "iosMicrophoneUsageDescription": "हमारे-शिक्षक needs access to your microphone to capture audio for your Attendance.",
+    "iOSATTUserTrackingDescription": "Your data will not be used with anyone.",
+    "iOSRequestATTConsentOnLoad": true,
+    "iosBackgroundAudio": true
+  },
+  "developmentTools": {
+    "enableWebConsoleLogs": false
+  },
+  "services": {
+    "oneSignalV5": {
+      "active": false,
+      "applicationId": "9744bd3d-1f04-4486-a47d-de6d644e075c"
+    }
+  },
+  "contextMenu": {
+    "linkActions": [
+      "copyLink",
+      "openExternal"
+    ],
+    "enabled": false
+  },
+  "allowZoom": null,
+  "security": {
+    "network": {
+      "allowInsecure": null
+    }
+  },
+  "script": {}
+}

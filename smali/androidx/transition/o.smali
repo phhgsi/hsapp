@@ -1,0 +1,28 @@
+.class public final synthetic Landroidx/transition/o;
+.super Ljava/lang/Object;
+.source "SourceFile"
+
+# interfaces
+.implements Landroidx/transition/k$h;
+
+
+# direct methods
+.method public synthetic constructor <init>()V
+    .locals 0
+
+    .line 1
+    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
+
+    return-void
+.end method
+
+
+# virtual methods
+.method public final a(Landroidx/transition/k$g;Landroidx/transition/k;Z)V
+    .locals 0
+
+    .line 1
+    invoke-static {p1, p2, p3}, Landroidx/transition/r;->a(Landroidx/transition/k$g;Landroidx/transition/k;Z)V
+
+    return-void
+.end method
