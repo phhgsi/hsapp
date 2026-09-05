@@ -21,17 +21,6 @@
     return-void
 
     :cond_0
-    invoke-virtual {p0}, Ljava/lang/Object;->getClass()Ljava/lang/Class;
-    move-result-object v0
-    invoke-virtual {v0}, Ljava/lang/Class;->getName()Ljava/lang/String;
-    move-result-object v0
-    const-string v1, "LaunchActivity"
-    invoke-virtual {v0, v1}, Ljava/lang/String;->contains(Ljava/lang/CharSequence;)Z
-    move-result v0
-    if-eqz v0, :cond_skip_launch
-    return-void
-
-    :cond_skip_launch
     :try_start_0
     invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
     move-result-object v0
