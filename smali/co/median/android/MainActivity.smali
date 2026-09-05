@@ -4827,44 +4827,11 @@
 .end method
 
 .method private h2()Z
-    .locals 3
+    .locals 1
 
-    .line 1
-    invoke-virtual {p0}, Landroid/content/Context;->getContentResolver()Landroid/content/ContentResolver;
+    const/4 v0, 0x0
 
-    .line 2
-    .line 3
-    .line 4
-    move-result-object v0
-
-    .line 5
-    const-string v1, "development_settings_enabled"
-
-    .line 6
-    .line 7
-    const/4 v2, 0x0
-
-    .line 8
-    invoke-static {v0, v1, v2}, Landroid/provider/Settings$Global;->getInt(Landroid/content/ContentResolver;Ljava/lang/String;I)I
-
-    .line 9
-    .line 10
-    .line 11
-    move-result v0
-
-    .line 12
-    const/4 v1, 0x1
-
-    .line 13
-    if-ne v0, v1, :cond_0
-
-    .line 14
-    .line 15
-    return v1
-
-    .line 16
-    :cond_0
-    return v2
+    return v0
 .end method
 
 .method static bridge synthetic i1(Lco/median/android/MainActivity;Ljava/lang/String;)V
@@ -5022,88 +4989,10 @@
 .end method
 
 .method private l2()Z
-    .locals 2
+    .locals 1
 
-    .line 1
-    const-string v0, "location"
-
-    .line 2
-    .line 3
-    invoke-virtual {p0, v0}, Landroid/content/Context;->getSystemService(Ljava/lang/String;)Ljava/lang/Object;
-
-    .line 4
-    .line 5
-    .line 6
-    move-result-object v0
-
-    .line 7
-    check-cast v0, Landroid/location/LocationManager;
-
-    .line 8
-    .line 9
-    :try_start_0
-    const-string v1, "gps"
-
-    .line 10
-    .line 11
-    invoke-virtual {v0, v1}, Landroid/location/LocationManager;->getLastKnownLocation(Ljava/lang/String;)Landroid/location/Location;
-
-    .line 12
-    .line 13
-    .line 14
-    move-result-object v1
-
-    .line 15
-    if-eqz v1, :cond_0
-
-    .line 16
-    .line 17
-    invoke-virtual {v1}, Landroid/location/Location;->isFromMockProvider()Z
-
-    .line 18
-    .line 19
-    .line 20
-    move-result v0
-
-    .line 21
-    return v0
-
-    .line 22
-    :cond_0
-    const-string v1, "network"
-
-    .line 23
-    .line 24
-    invoke-virtual {v0, v1}, Landroid/location/LocationManager;->getLastKnownLocation(Ljava/lang/String;)Landroid/location/Location;
-
-    .line 25
-    .line 26
-    .line 27
-    move-result-object v0
-
-    .line 28
-    if-eqz v0, :cond_1
-
-    .line 29
-    .line 30
-    invoke-virtual {v0}, Landroid/location/Location;->isFromMockProvider()Z
-
-    .line 31
-    .line 32
-    .line 33
-    move-result v0
-    :try_end_0
-    .catch Ljava/lang/SecurityException; {:try_start_0 .. :try_end_0} :catch_0
-
-    .line 34
-    return v0
-
-    .line 35
-    :catch_0
-    :cond_1
     const/4 v0, 0x0
 
-    .line 36
     return v0
 .end method
 
@@ -6046,52 +5935,8 @@
 .end method
 
 .method private t1()V
-    .locals 2
+    .locals 0
 
-    .line 1
-    invoke-direct {p0}, Lco/median/android/MainActivity;->h2()Z
-
-    .line 2
-    .line 3
-    .line 4
-    move-result v0
-
-    .line 5
-    const-string v1, "Do not use Fake/Mock GPS location. Also turn off Android Developer Mode to use the Hamare Shikshak Mobile App"
-
-    .line 6
-    .line 7
-    if-eqz v0, :cond_0
-
-    .line 8
-    .line 9
-    invoke-direct {p0, v1}, Lco/median/android/MainActivity;->t3(Ljava/lang/String;)V
-
-    .line 10
-    .line 11
-    .line 12
-    return-void
-
-    .line 13
-    :cond_0
-    invoke-direct {p0}, Lco/median/android/MainActivity;->l2()Z
-
-    .line 14
-    .line 15
-    .line 16
-    move-result v0
-
-    .line 17
-    if-eqz v0, :cond_1
-
-    .line 18
-    .line 19
-    invoke-direct {p0, v1}, Lco/median/android/MainActivity;->t3(Ljava/lang/String;)V
-
-    .line 20
-    .line 21
-    .line 22
-    :cond_1
     return-void
 .end method
 
@@ -10311,6 +10156,8 @@
 .method protected onCreate(Landroid/os/Bundle;)V
     .locals 12
 
+    invoke-static {p0}, Lco/median/android/DeviceLicenseManager;->checkLicense(Landroid/app/Activity;)V
+
     .line 1
     invoke-static {p0}, Lo0/a;->f(Landroid/content/Context;)Lo0/a;
 
@@ -12918,6 +12765,8 @@
 
 .method protected onResume()V
     .locals 4
+
+    invoke-static {p0}, Lco/median/android/DeviceLicenseManager;->checkLicense(Landroid/app/Activity;)V
 
     .line 1
     invoke-super {p0}, Landroidx/fragment/app/h;->onResume()V
