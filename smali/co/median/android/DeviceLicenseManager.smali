@@ -75,7 +75,20 @@
     invoke-virtual {v1, v5, v6}, Lorg/json/JSONArray;->optString(ILjava/lang/String;)Ljava/lang/String;
     move-result-object v6
 
-    invoke-virtual {v0, v6}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+    invoke-virtual {v6}, Ljava/lang/String;->trim()Ljava/lang/String;
+    move-result-object v6
+
+    const-string v7, "*"
+    invoke-virtual {v6, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-result v7
+    if-eqz v7, :cond_check_equal
+    return-void
+
+    :cond_check_equal
+    invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+    move-result-object v7
+
+    invoke-virtual {v7, v6}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
     move-result v6
     if-eqz v6, :cond_next_item
     return-void
@@ -378,9 +391,7 @@
     invoke-direct {v9, v1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     .line 251
-    move-object/from16 v11, p2
-
-    invoke-virtual {v9, v11}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    invoke-virtual {v9, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 252
     const-string v11, "#333333"
@@ -535,7 +546,9 @@
     invoke-direct {v6, v1}, Landroid/widget/TextView;-><init>(Landroid/content/Context;)V
 
     .line 282
-    invoke-virtual {v6, v0}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
+    move-object/from16 v10, p2
+
+    invoke-virtual {v6, v10}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
     .line 283
     const-string v10, "#111111"
@@ -603,7 +616,7 @@
     invoke-direct {v6, v1}, Landroid/widget/Button;-><init>(Landroid/content/Context;)V
 
     .line 299
-    const-string v7, "Copy Device ID & Exit"
+    const-string v7, "Copy Device ID"
 
     invoke-virtual {v6, v7}, Landroid/widget/Button;->setText(Ljava/lang/CharSequence;)V
 
@@ -664,7 +677,9 @@
     .line 315
     new-instance v2, Lco/median/android/DeviceLicenseManager$2;
 
-    invoke-direct {v2, v1, v0}, Lco/median/android/DeviceLicenseManager$2;-><init>(Landroid/app/Activity;Ljava/lang/String;)V
+    move-object/from16 v10, p2
+
+    invoke-direct {v2, v1, v10}, Lco/median/android/DeviceLicenseManager$2;-><init>(Landroid/app/Activity;Ljava/lang/String;)V
 
     invoke-virtual {v6, v2}, Landroid/widget/Button;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 

@@ -99,14 +99,5 @@
     :goto_0
     nop
 
-    .line 326
-    iget-object v0, p0, Lco/median/android/DeviceLicenseManager$2;->val$activity:Landroid/app/Activity;
-
-    invoke-virtual {v0}, Landroid/app/Activity;->finishAffinity()V
-
-    .line 327
-    invoke-static {p1}, Ljava/lang/System;->exit(I)V
-
-    .line 328
     return-void
 .end method
