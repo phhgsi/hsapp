@@ -2,3 +2,7 @@ build/
 *.tmp
 .DS_Store
 *.apk
+
+*.jks
+*.idsig
+
