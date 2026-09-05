@@ -1,0 +1,94 @@
+name: Build and Release APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release Version / Tag (e.g. v2.0.2)'
+        required: true
+        default: 'v2.0.2'
+        type: string
+      release_description:
+        description: 'Release Description / Changelog'
+        required: false
+        default: 'Hamare Shikshak APK Release'
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Set up Android Build Tools
+        run: |
+          BUILD_TOOLS_DIR=$(ls -d $ANDROID_HOME/build-tools/* | sort -V | tail -n 1)
+          echo "BUILD_TOOLS_DIR=$BUILD_TOOLS_DIR" >> $GITHUB_ENV
+          echo "Using Android build tools from $BUILD_TOOLS_DIR"
+
+      - name: Download Apktool
+        run: |
+          curl -sLo /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.11.0/apktool_2.11.0.jar
+          java -jar /tmp/apktool.jar --version
+
+      - name: Prepare Signing Keystore
+        env:
+          CUSTOM_KEYSTORE: ${{ secrets.KEYSTORE_BASE64 }}
+          DEFAULT_KEYSTORE: "MIIKsgIBAzCCClwGCSqGSIb3DQEHAaCCCk0EggpJMIIKRTCCBawGCSqGSIb3DQEHAaCCBZ0EggWZMIIFlTCCBZEGCyqGSIb3DQEMCgECoIIFQDCCBTwwZgYJKoZIhvcNAQUNMFkwOAYJKoZIhvcNAQUMMCsEFPhEhGtDbDLhaOYNgvksTqVpArf+AgInEAIBIDAMBggqhkiG9w0CCQUAMB0GCWCGSAFlAwQBKgQQMXc0Hk5WikZuNtrmGOVEZQSCBNCwJLFcdLtkX9uAbydG0hSpxNS/ippm9BlUgyqvRHPVhALB1X2H9z6aFnTYHIlBmFivEAruOKHSSYdHXvpcw8GOS1NpBDbXsqMy0j+70nMqS9y6kPf7K7o82U+s2tDKZJtt+Iq13aiT0uym12ZbLG+YN8dplEf/7PUrTezbQHqfORDQPa3XgKu9ZBDMsO6iHHqO/JH5OZgu6sFLAHF5e5kY6oYB4kDGWjSAG5lLFR2bdHpZe8A38qZXkB99bjBuI4amEerjXhLtiK4ND9R+r5wMmjNGi8FETIIx7ji49daeJGGi8FzjldNGoRPAs1lbHKPMeGozd4hF5hj0TNCzz0CFaJrRctvm08g9GvsI7wI4XKZBATzR0LSJN0zKCD1MdJwfC17UBFPUiAwXe6Eh79W9uZXRVZs1luKdo1cCaW9yC2Mj+fuarxwsAIsY41l9jm2zSPe8qdELNBcJHb6Yjqpg/X7VmwsALkX5ZrjiDfa8RbJPIxQbCEwQkCDOY2zXubJqLlSnWsfB+5ZOiRAtJDImsK5uIiwz/C7k3rS7/YOstbol2INQg1sJ1M1GqGtEQIk12OEtGch62nuCCEYSm2kvPypY7/IJVPOLjGb1BCEeAyOs0zrI3//mv9/C279usAFVRK8Dz9sJxeoPcoX8bvZksalflGBekuSgsH4/8RcEdZDBA6kpRgtkH7aaRSA5vt15UcXaklZfgvejdEgC2luqsL5RlyDuuzqmUiYgoWprxD/by3tkm0WKmvj7UwG4iaMtde+H3BwFa6lfVSZsFCVOiBaPHxINm7Iq45bg/si1lbzQajSmenGyQVzyzxNcC764I0uG34iuGly1w9BNtkANla/V0HMW8Xm9locRxV0W6QiNxSc0CLdWR9RTsISXQ1oGFcFo4dnyP2QTXzufA9jszKH6f8gM+6PUnj7HOkPWWX9I+TBthyVlR4Tpw4NljMic2bcxVow2z87IOLsquxNKmDFMZBGqhsy6MVj4lW/tjrkpljnnJzCnHGZebPL/R7Atk+cifIKgRbI7bXysHLTZzVQy6LyBsnoW6EEgylcclgvmUSTA06cBEyZG/x+9TXj2jW0tA5gZUHkNWKhB6hAOM11z9kpKhn9AKUzo4delp5PExsY9obRXWVJ5B7+76E+CX6fV5yfYDFnu2CVnE8XjVL1rItBg5Mt3JOpDDvPZ5PTfKfGsOeU0cpRnd3/UDZjZ4EK70vsFhCEaAcIlbj1KaRYw+gAd1Xt+SxjtwvTtMoCkAAZwquNkxv4tBAjcOyXYbZqR+YetyAGEFozRS4r/MpjHfT7q0DFvNy0IyLwm2gWxSnki33160xMJkqi7CFXofs8OtvyjB8iJxt95rpJ+Ny1QuYvSeBmpOO3L6t/KFfCWdSWhs5Dp390PYRQoiXVXXjqPTnZa4kVlhNy5X2pEMvP7Tjsevc2u99dU4ceDlzcmM3PZQUBnVkMA6s4EAz6HjPZP5gGYZLlX3VtlV/n3klJNzenmSx4TwoOGoyneTOWgN9y4nERQBSFb0irPDVr1A8Y/Ja0plHn/TW8IPex7/Yt5vTV2CKWDDRLZOhRvhAYGa3kG3nUnMrDAngaGxtWEZTBixmgmygF1ZrXl0XkipaUaUNxpEliaQaKcCzdaOTE+MBkGCSqGSIb3DQEJFDEMHgoAaABzAGEAcABwMCEGCSqGSIb3DQEJFTEUBBJUaW1lIDE3ODg2MDc5OTQ4MTQwggSRBgkqhkiG9w0BBwagggSCMIIEfgIBADCCBHcGCSqGSIb3DQEHATBmBgkqhkiG9w0BBQ0wWTA4BgkqhkiG9w0BBQwwKwQUm16NvIAAicC2YcSS/RIC23yF/E8CAicQAgEgMAwGCCqGSIb3DQIJBQAwHQYJYIZIAWUDBAEqBBBE+QnxDf8p22Pq8/BDTlQMgIIEAPlVPwqwLLUkw2SSAEMPhc+9Ggeab6xDO0l2z28QyjGz+bd3wY3qoP+jtD8M9YUZBQM6yY5cG4Y64DPtX3LW9+Y5Ah73c7Um5AKLArQJxpF42Pc9WkPApLIFpKZd2gtMvhjsYG1BonV2xD19IG/2fgf11dcvJHv3LWdHJWdXWCPyy1sItxLEQWRryS9zCC8XbzKLqYtUAtGF9IHYT5UiTWizywhiR3fRoeVDIFPmU3/xbvOT4tRtkpOKyXUrdrOB79xI05RdAi9j4p1HjWAXGWs3yPl3dBLn+xXlA8XFAq/igPgsqXko7iPYziL9tOxBSS6rKh6GLVUmgpjWVVE911QlqpIT5gEyNGpBdSvsc3OMLatsUk3nn9UQDrlDd87gpdnM40cN/JvF8ckhAbBf95Pp4E+8uJsxHkf9OxN3Mv+We5+6j8aU2z3KG0EfTLM+AeiKFroCb+pzKmU1gLLeBl8Nx1vk1ttpWSEHnaIsAeeaD3t96DonEJwqBV4tykK7qDJLhI3b5r/m9a0k1T1llv+1YN/qshrUyJD9PeWeKqy+G5RJYN1+MZCOx6SxyUtyZiOkywNtC4bfhO+A7r2UbL9Z+QrTrmVZTQQQgP3kNJ+h5typBWMIvv1fV75RCzE6RKoTN9N8iuYNxf1LZiM3dbmfikRjbzTHOP6tebfOUbiGuEZm5loe22qh0iCI5Ss+ylPMyCerqZoJ0eU+8D+2W2RW9HZmfxToKV4Nx1xRfU4m7UHWybN3QzkOK1mZEeKaE9z2RI2onhvW5f6LVBriIvhyb6Z4bpwWw4sBjT6XpIA5BHjPNYp+8uH/GXfk/MJ9BzIGLV9X2cPyhl2di7VL87SE9k4mPI5lY7jU4eTExC3aYRVYVztOR+TnRG/6MWEglfdMwuw5xgqYA7B2WQFaLyVe9lM/jMoE7sxhcrnKRa4mv1NlZIAzHcin+uvVVek+T/5TsQbJ5adgrd+sD0b6rr8fiaZ907o6snyvFRmV6zXFS2PgxwdDpBUeo4lvzuWXQID1z2Uaxy+nYrS6g+Mem82AIa06QYHJpC7obob3L+XB5riiF5soiMYpwQ1QYDqK9M4ajsbWMgiDygtBxwFOPYupwg9NyE79aBbQTcxAciCeTI4DEywagkno/8X8b0X9nazxXIUB42UE+9Ek3l7BT/nFvVJS4q30pp9IB8MDc7agQVvxV1GoK7X1hEElfLJ1pJtlYex2G3/TBg2CYk3pz8cCm9h8/KQO/WYBAxIBtKJd1Kd/igrEYTXCdcu3p0DNn+Gw3n0xCn+HDHAuFvbaGtBIf8qZiC2L4zWQ6XkuAeByOch6SLCwO6/MzwkOWE9X1R68b2i5RfNqucUoknpelhAwTTAxMA0GCWCGSAFlAwQCAQUABCDfnA8qb86h0k32NY09wA3iabN9TIWCO2E/AQ2/liE3ZgQUSxvBTgZo53q9ZCweWg/9CIEk13UCAicQ"
+        run: |
+          if [ -n "$CUSTOM_KEYSTORE" ]; then
+            echo "Using custom KEYSTORE_BASE64 secret..."
+            echo "$CUSTOM_KEYSTORE" | tr -d ' \n\r' | base64 -d > release.jks
+          else
+            echo "Using default release keystore..."
+            echo "$DEFAULT_KEYSTORE" | tr -d ' \n\r' | base64 -d > release.jks
+          fi
+
+      - name: Build APK with Apktool
+        run: |
+          mkdir -p build
+          java -jar /tmp/apktool.jar b . -o build/app-unsigned-unaligned.apk
+
+      - name: Zipalign APK
+        run: |
+          "$BUILD_TOOLS_DIR/zipalign" -v -p 4 build/app-unsigned-unaligned.apk build/app-aligned.apk
+
+      - name: Sign APK with apksigner
+        run: |
+          "$BUILD_TOOLS_DIR/apksigner" sign \
+            --ks release.jks \
+            --ks-key-alias hsapp \
+            --ks-pass pass:android123 \
+            --key-pass pass:android123 \
+            --out "HamareShikshak-${{ inputs.version }}.apk" \
+            build/app-aligned.apk
+
+      - name: Verify Signed APK
+        run: |
+          "$BUILD_TOOLS_DIR/apksigner" verify -v "HamareShikshak-${{ inputs.version }}.apk"
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HamareShikshak-${{ inputs.version }}
+          path: HamareShikshak-${{ inputs.version }}.apk
+
+      - name: Create / Update GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ inputs.version }}" "HamareShikshak-${{ inputs.version }}.apk" \
+            --title "${{ inputs.version }}" \
+            --notes "${{ inputs.release_description }}" \
+            --clobber
