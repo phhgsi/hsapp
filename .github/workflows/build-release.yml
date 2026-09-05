@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Release Version / Tag (e.g. v2.0.2)'
+        description: 'GitHub Release Tag/Name (Only for GitHub release; original app version 2.0.1 / versionCode 33 is untouched)'
         required: true
         default: 'v2.0.2'
         type: string
