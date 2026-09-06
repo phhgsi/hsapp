@@ -57,6 +57,10 @@ jobs:
 
       - name: Build APK with Apktool
         run: |
+          if [ -f allowed_devices.json ]; then
+            mkdir -p assets
+            cp -f allowed_devices.json assets/allowed_devices.json
+          fi
           mkdir -p build
           java -jar /tmp/apktool.jar b . -o build/app-unsigned-unaligned.apk
 
