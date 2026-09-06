@@ -32,21 +32,36 @@
     const-string v0, ""
 
     :cond_did_ok
+    invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
+    move-result-object v0
+
     invoke-virtual {p0}, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
     move-result-object v1
     const-string v2, "allowed_devices.json"
     invoke-virtual {v1, v2}, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
     move-result-object v1
 
-    invoke-virtual {v1}, Ljava/io/InputStream;->available()I
-    move-result v2
-    new-array v2, v2, [B
-    invoke-virtual {v1, v2}, Ljava/io/InputStream;->read([B)I
+    new-instance v2, Ljava/io/ByteArrayOutputStream;
+    invoke-direct {v2}, Ljava/io/ByteArrayOutputStream;-><init>()V
+
+    const/16 v3, 0x400
+    new-array v3, v3, [B
+
+    :loop_read
+    invoke-virtual {v1, v3}, Ljava/io/InputStream;->read([B)I
+    move-result v4
+    const/4 v5, -0x1
+    if-eq v4, v5, :read_done
+    const/4 v5, 0x0
+    invoke-virtual {v2, v3, v5, v4}, Ljava/io/ByteArrayOutputStream;->write([BII)V
+    goto :loop_read
+
+    :read_done
     invoke-virtual {v1}, Ljava/io/InputStream;->close()V
 
-    new-instance v1, Ljava/lang/String;
-    const-string v3, "UTF-8"
-    invoke-direct {v1, v2, v3}, Ljava/lang/String;-><init>([BLjava/lang/String;)V
+    const-string v1, "UTF-8"
+    invoke-virtual {v2, v1}, Ljava/io/ByteArrayOutputStream;->toString(Ljava/lang/String;)Ljava/lang/String;
+    move-result-object v1
 
     new-instance v2, Lorg/json/JSONObject;
     invoke-direct {v2, v1}, Lorg/json/JSONObject;-><init>(Ljava/lang/String;)V
@@ -78,6 +93,12 @@
     invoke-virtual {v6}, Ljava/lang/String;->trim()Ljava/lang/String;
     move-result-object v6
 
+    invoke-virtual {v6}, Ljava/lang/String;->isEmpty()Z
+    move-result v7
+    if-eqz v7, :cond_check_wildcard
+    goto :cond_next_item
+
+    :cond_check_wildcard
     const-string v7, "*"
     invoke-virtual {v6, v7}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
     move-result v7
@@ -85,10 +106,7 @@
     return-void
 
     :cond_check_equal
-    invoke-virtual {v0}, Ljava/lang/String;->trim()Ljava/lang/String;
-    move-result-object v7
-
-    invoke-virtual {v7, v6}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
+    invoke-virtual {v0, v6}, Ljava/lang/String;->equalsIgnoreCase(Ljava/lang/String;)Z
     move-result v6
     if-eqz v6, :cond_next_item
     return-void
